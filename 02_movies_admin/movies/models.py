@@ -36,9 +36,6 @@ class Genre(UUIDMixin, TimeStampedMixin):
 class Person(UUIDMixin, TimeStampedMixin):
     full_name = models.TextField(_('full_name'))
 
-    # todo: а как сюда то добавить?
-    # film_works = models.ManyToManyField(FilmWork, through='PersonFilmWork', verbose_name='кинопроизведения')
-
     def __str__(self):
         return self.full_name
 

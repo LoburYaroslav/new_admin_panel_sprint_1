@@ -1,6 +1,5 @@
 from django.contrib import admin
-from movies.models import (FilmWork, Genre, GenreFilmWork, Person,
-                           PersonFilmWork)
+from movies.models import FilmWork, Genre, GenreFilmWork, Person, PersonFilmWork
 
 
 @admin.register(Genre)
@@ -23,8 +22,7 @@ class PersonFilmWorkInline(admin.TabularInline):
 
 @admin.register(FilmWork)
 class FilmWorkAdmin(admin.ModelAdmin):
-    # inlines = (GenreFilmWorkInline, PersonFilmWorkInline)  todo: есть проблема с долгим запросом
-    inlines = (GenreFilmWorkInline,)
+    inlines = (GenreFilmWorkInline, PersonFilmWorkInline)  # todo: есть проблема с долгим запросом. в идеале заменить виджет на ajax
     list_display = ('title', 'type', 'creation_date', 'rating',)
     list_filter = ('type',)
     search_fields = ('title', 'description', 'id')

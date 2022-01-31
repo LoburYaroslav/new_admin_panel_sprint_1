@@ -23,7 +23,7 @@ class FilmWork:
     table_name: ClassVar[str] = 'film_work'
 
     fetch_query: ClassVar[str] = """
-    SELECT id,title, description, creation_date, certificate, file_path, rating, type, created_at, updated_at
+    SELECT id, title, description, creation_date, certificate, file_path, rating, type, created_at, updated_at
     FROM main.film_work
     LIMIT {limit} OFFSET {offset};
     """
@@ -66,9 +66,9 @@ class Person:
 @dataclass(frozen=True)
 class GenreFilmWork:
     id: UUID
-    created: datetime
     film_work_id: UUID
     genre_id: UUID
+    created: datetime
 
     table_name: ClassVar[str] = 'genre_film_work'
     fetch_query: ClassVar[str] = """
@@ -82,10 +82,10 @@ class GenreFilmWork:
 @dataclass(frozen=True)
 class PersonFilmWork:
     id: UUID
-    role: str
-    created: datetime
     film_work_id: UUID
     person_id: UUID
+    role: str
+    created: datetime
 
     table_name: ClassVar[str] = 'person_film_work'
     fetch_query: ClassVar[str] = """

@@ -67,7 +67,7 @@ class FilmWork(UUIDMixin, TimeStampedMixin):
     )
     genres = models.ManyToManyField(Genre, through='GenreFilmWork', verbose_name=_('genres'), )
     persons = models.ManyToManyField(Person, through='PersonFilmWork', verbose_name=_('persons'))
-    certificate = models.CharField(_('certificate'), max_length=512, blank=True)
+    certificate = models.CharField(_('certificate'), max_length=512, blank=True, null=True)
     # Параметр upload_to указывает, в какой подпапке будут храниться загружемые файлы.
     # Базовая папка указана в файле настроек как MEDIA_ROOT
     file_path = models.FileField(_('file'), blank=True, null=True, upload_to='movies/')

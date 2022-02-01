@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('movies', '0001_initial'),
     ]
@@ -13,7 +12,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='filmwork',
             name='certificate',
-            field=models.CharField(blank=True, max_length=512, verbose_name='certificate'),
+            field=models.CharField(blank=True, null=True, max_length=512, verbose_name='certificate'),
         ),
         migrations.AddField(
             model_name='filmwork',

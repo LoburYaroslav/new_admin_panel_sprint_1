@@ -83,24 +83,25 @@ class Genre(BaseEntity):
 class Person(BaseEntity):
     id: UUID
     full_name: str
+    birth_date: date
     created: datetime
     modified: datetime
 
-    column_count: ClassVar[int] = 4
+    column_count: ClassVar[int] = 5
     fetch_query: ClassVar[str] = """
-        SELECT id, full_name, created_at, updated_at
+        SELECT id, full_name, birth_date, created_at, updated_at
         FROM main.person
         LIMIT {limit} OFFSET {offset};
     """
     insert_query: ClassVar[str] = """
-        INSERT INTO content.person (id, full_name, created, modified)
+        INSERT INTO content.person (id, full_name, birth_date, created, modified)
         VALUES {args}
         ON CONFLICT (id) DO NOTHING
     """
 
     def as_tuple(self):
         return (
-            self.id, self.full_name, self.created, self.modified
+            self.id, self.full_name, self.birth_date, self.created, self.modified
         )
 
 

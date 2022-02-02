@@ -35,6 +35,7 @@ class Genre(UUIDMixin, TimeStampedMixin):
 
 class Person(UUIDMixin, TimeStampedMixin):
     full_name = models.TextField(_('full_name'))
+    birth_date = models.DateField(_('birth_date'), blank=True, null=True)
 
     def __str__(self):
         return self.full_name

@@ -92,6 +92,15 @@ class GenreFilmWork(UUIDMixin):
         verbose_name = _('film_work_genre_rel')
         verbose_name_plural = _('film_work_genre_rel_plural')
 
+        indexes = [
+            models.Index(fields=['genre'], name='genre_film_work_genre_idx'),
+            models.Index(fields=['film_work'], name='genre_film_work_film_work_idx'),
+        ]
+
+        constraints = [
+            models.UniqueConstraint(fields=['film_work', 'genre'], name='unique_film_work_genre')
+        ]
+
 
 class PersonFilmWork(UUIDMixin):
     film_work = models.ForeignKey('FilmWork', on_delete=models.RESTRICT)
@@ -103,3 +112,12 @@ class PersonFilmWork(UUIDMixin):
         db_table = 'content"."person_film_work'
         verbose_name = _('person_film_work_rel_plural')
         verbose_name_plural = _('person_film_work_rel_plural')
+
+        indexes = [
+            models.Index(fields=['person'], name='person_film_work_person_idx'),
+            models.Index(fields=['film_work'], name='person_film_work_film_work_idx'),
+        ]
+
+        constraints = [
+            models.UniqueConstraint(fields=['person', 'film_work', 'role'], name='unique_film_work_member')
+        ]

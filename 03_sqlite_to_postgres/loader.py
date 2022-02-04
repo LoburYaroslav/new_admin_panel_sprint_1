@@ -16,4 +16,7 @@ class SQLiteLoader:
             entity.fetch_query.format(limit=fetch_count, offset=offset)
         ).fetchall()
 
-        return [entity(*row) for row in rows]  # не оч то нужны dataclass-ы при переносе..
+        return [entity(*row) for row in rows]
+
+    def __del__(self):
+        self.cur.close()

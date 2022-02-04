@@ -103,3 +103,14 @@ msgstr "роль"
 #: movies/models.py:106 movies/models.py:107
 msgid "person_film_work_rel_plural"
 msgstr "связь кинопроизведений с актерами"
+
+
+msgid "actor"
+msgstr "актёр"
+
+msgid "writer"
+msgstr "сценарист"
+
+msgid "director"
+msgstr "режиссер"
+

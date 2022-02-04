@@ -33,7 +33,7 @@ class FilmWork(BaseEntity):
     modified: datetime
 
     fetch_query: ClassVar[str] = """
-        SELECT id, title, description, creation_date, certificate, file_path, rating, type, created_at, updated_at
+        SELECT id, title, description, creation_date, certificate, file_path, rating, type, created_at as created, updated_at as modified
         FROM main.film_work
         LIMIT {limit} OFFSET {offset};
     """
@@ -59,7 +59,7 @@ class Genre(BaseEntity):
     modified: datetime
 
     fetch_query: ClassVar[str] = """
-        SELECT id, name, description, created_at, updated_at
+        SELECT id, name, description, created_at as created, updated_at as modified
         FROM main.genre
         LIMIT {limit} OFFSET {offset};
     """
@@ -84,7 +84,7 @@ class Person(BaseEntity):
     modified: datetime
 
     fetch_query: ClassVar[str] = """
-        SELECT id, full_name, birth_date, created_at, updated_at
+        SELECT id, full_name, birth_date, created_at as created, updated_at as modified
         FROM main.person
         LIMIT {limit} OFFSET {offset};
     """
@@ -108,7 +108,7 @@ class GenreFilmWork(BaseEntity):
     created: datetime
 
     fetch_query: ClassVar[str] = """
-        SELECT id, film_work_id, genre_id, created_at
+        SELECT id, film_work_id, genre_id, created_at as created
         FROM main.genre_film_work
         LIMIT {limit} OFFSET {offset};
     """
@@ -133,7 +133,7 @@ class PersonFilmWork(BaseEntity):
     created: datetime
 
     fetch_query: ClassVar[str] = """
-        SELECT id, film_work_id, person_id, role, created_at
+        SELECT id, film_work_id, person_id, role, created_at as created
         FROM main.person_film_work
         LIMIT {limit} OFFSET {offset};
     """

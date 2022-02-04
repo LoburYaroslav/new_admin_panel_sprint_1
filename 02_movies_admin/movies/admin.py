@@ -14,15 +14,17 @@ class PersonAdmin(admin.ModelAdmin):
 
 class GenreFilmWorkInline(admin.TabularInline):
     model = GenreFilmWork
+    raw_id_fields = ['genre']
 
 
 class PersonFilmWorkInline(admin.TabularInline):
     model = PersonFilmWork
+    raw_id_fields = ['person']
 
 
 @admin.register(FilmWork)
 class FilmWorkAdmin(admin.ModelAdmin):
-    inlines = (GenreFilmWorkInline, PersonFilmWorkInline)  # todo: есть проблема с долгим запросом. в идеале заменить виджет на ajax
+    inlines = (GenreFilmWorkInline, PersonFilmWorkInline)  # пока пофиксил долгие запросы с помощью raw_id_fields
     list_display = ('title', 'type', 'creation_date', 'rating',)
     list_filter = ('type',)
     search_fields = ('title', 'description', 'id')

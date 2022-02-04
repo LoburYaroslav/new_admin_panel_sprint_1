@@ -1,7 +1,6 @@
 """
 Тут описаны дата-классы таблиц и целевые запросы на чтение/вставку для них.
 
-column_count - кол-во целевых колонок в сущности
 fetch_query - запрос для экстракции данный из sqlite
 insert_query - запрос на вставку в postgresql
 
@@ -13,7 +12,6 @@ from uuid import UUID
 
 
 class BaseEntity:  # Нужен в основном для типизации
-    column_count: ClassVar[int]
     fetch_query: ClassVar[str]
     insert_query: ClassVar[str]
 
@@ -34,7 +32,6 @@ class FilmWork(BaseEntity):
     created: datetime
     modified: datetime
 
-    column_count: ClassVar[int] = 10
     fetch_query: ClassVar[str] = """
         SELECT id, title, description, creation_date, certificate, file_path, rating, type, created_at, updated_at
         FROM main.film_work
@@ -42,7 +39,7 @@ class FilmWork(BaseEntity):
     """
     insert_query: ClassVar[str] = """
         INSERT INTO content.film_work (id, title, description, creation_date, certificate, file_path, rating, type, created, modified)
-        VALUES {args}
+        VALUES %s
         ON CONFLICT (id) DO NOTHING
     """
 
@@ -61,7 +58,6 @@ class Genre(BaseEntity):
     created: datetime
     modified: datetime
 
-    column_count: ClassVar[int] = 5
     fetch_query: ClassVar[str] = """
         SELECT id, name, description, created_at, updated_at
         FROM main.genre
@@ -69,7 +65,7 @@ class Genre(BaseEntity):
     """
     insert_query: ClassVar[str] = """
         INSERT INTO content.genre (id, name, description, created, modified)
-        VALUES {args}
+        VALUES %s
         ON CONFLICT (id) DO NOTHING
     """
 
@@ -87,7 +83,6 @@ class Person(BaseEntity):
     created: datetime
     modified: datetime
 
-    column_count: ClassVar[int] = 5
     fetch_query: ClassVar[str] = """
         SELECT id, full_name, birth_date, created_at, updated_at
         FROM main.person
@@ -95,7 +90,7 @@ class Person(BaseEntity):
     """
     insert_query: ClassVar[str] = """
         INSERT INTO content.person (id, full_name, birth_date, created, modified)
-        VALUES {args}
+        VALUES %s
         ON CONFLICT (id) DO NOTHING
     """
 
@@ -112,7 +107,6 @@ class GenreFilmWork(BaseEntity):
     genre_id: UUID
     created: datetime
 
-    column_count: ClassVar[int] = 4
     fetch_query: ClassVar[str] = """
         SELECT id, film_work_id, genre_id, created_at
         FROM main.genre_film_work
@@ -120,7 +114,7 @@ class GenreFilmWork(BaseEntity):
     """
     insert_query: ClassVar[str] = """
         INSERT INTO content.genre_film_work (id, film_work_id, genre_id, created)
-        VALUES {args}
+        VALUES %s
         ON CONFLICT (id) DO NOTHING
     """
 
@@ -138,7 +132,6 @@ class PersonFilmWork(BaseEntity):
     role: str
     created: datetime
 
-    column_count: ClassVar[int] = 5
     fetch_query: ClassVar[str] = """
         SELECT id, film_work_id, person_id, role, created_at
         FROM main.person_film_work
@@ -146,7 +139,7 @@ class PersonFilmWork(BaseEntity):
     """
     insert_query: ClassVar[str] = """
         INSERT INTO content.person_film_work (id, film_work_id, person_id, role, created)
-        VALUES {args}
+        VALUES %s
         ON CONFLICT (id) DO NOTHING
     """
 

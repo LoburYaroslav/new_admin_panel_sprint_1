@@ -4,22 +4,22 @@ from movies.models import FilmWork, Genre, GenreFilmWork, Person, PersonFilmWork
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('name',)
 
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('full_name',)
 
 
 class GenreFilmWorkInline(admin.TabularInline):
     model = GenreFilmWork
-    raw_id_fields = ['genre']
+    autocomplete_fields = ('genre',)
 
 
 class PersonFilmWorkInline(admin.TabularInline):
     model = PersonFilmWork
-    raw_id_fields = ['person']
+    autocomplete_fields = ('person',)
 
 
 @admin.register(FilmWork)

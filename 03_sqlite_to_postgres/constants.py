@@ -131,19 +131,20 @@ class PersonFilmWork(BaseEntity):
     person_id: UUID
     role: str
     created: datetime
+    modified: datetime
 
     fetch_query: ClassVar[str] = """
-        SELECT id, film_work_id, person_id, role, created_at as created
+        SELECT id, film_work_id, person_id, role, created_at as created, date('now') as modified
         FROM main.person_film_work
         LIMIT {limit} OFFSET {offset};
     """
     insert_query: ClassVar[str] = """
-        INSERT INTO content.person_film_work (id, film_work_id, person_id, role, created)
+        INSERT INTO content.person_film_work (id, film_work_id, person_id, role, created, modified)
         VALUES %s
         ON CONFLICT (id) DO NOTHING
     """
 
     def as_tuple(self):
         return (
-            self.id, self.film_work_id, self.person_id, self.role, self.created
+            self.id, self.film_work_id, self.person_id, self.role, self.created, self.modified
         )
